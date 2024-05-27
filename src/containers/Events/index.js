@@ -16,15 +16,22 @@ const EventList = () => {
   const filteredEvents = (
     (!type
       ? data?.events
-      : data?.events) || []
+      /* : data?.events) || [] */ // ancien code
+
+      : data?.events.filter((elem)=>elem.type === type)) || []
+
+
   ).filter((event, index) => {
-    if (
+
+    const typeFilter = !type || event.type === type; // corrigé - code ajouté
+
+    if ( typeFilter && // corrigé - code ajouté
       (currentPage - 1) * PER_PAGE <= index &&
       PER_PAGE * currentPage > index
     ) {
       return true;
     }
-    return false;
+    return false; 
   });
   const changeType = (evtType) => {
     setCurrentPage(1);
