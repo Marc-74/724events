@@ -13,7 +13,9 @@ import Modal from "../../containers/Modal";
 import { useData } from "../../contexts/DataContext";
 
 const Page = () => {
-  const {last} = useData()
+  /* const {last} = useData() */ // ancien code
+  const { data } = useData(); // Utilise un hook personnalisé pour obtenir des données
+  const last = data?.events?.[data.events.length - 1]; // Récupère le dernier événement dans le tableau 'events'
   return <>
     <header>
       <Menu />
@@ -115,15 +117,19 @@ const Page = () => {
     </main>
     <footer className="row">
       <div className="col presta">
-        <h3>Notre derniére prestation</h3>
-        <EventCard
-          imageSrc={last?.cover}
-          title={last?.title}
-          date={new Date(last?.date)}
+       <h3>Notre derniére prestation</h3>
+        {last && last.cover ? (
+          <EventCard
+          imageSrc={last.cover}
+          title={last.title}
+          date={new Date(last.date)}
           small
           label="boom"
         />
-      </div>
+        ) : (
+          <p>Aucune prestation disponible</p>
+        )}
+        </div>
       <div className="col contact">
         <h3>Contactez-nous</h3>
         <address>45 avenue de la République, 75000 Paris</address>
