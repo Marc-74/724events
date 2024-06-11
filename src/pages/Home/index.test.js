@@ -37,6 +37,10 @@ describe("When a page is created", () => {
   })
   it("a footer is displayed", () => {
     // to implement
+    render(< Home />)
+    expect(screen.getByTestId("footer")).toBeInTheDocument()
+    /* Test unitaire d'un élément présent dans le footer */
+    expect(screen.getByText("45 avenue de la République, 75000 Paris")).toBeInTheDocument()
   })
   it("an event card, with the last event, is displayed", () => {
     // to implement
